@@ -1,0 +1,31 @@
+logging:
+  level:
+    root: info
+spring:
+  application:
+    name: mcp
+  main:
+    web-application-type: none
+  ai:
+    openai:
+      api-key: sk-xxxxxxxxx
+      base-url: https://api.siliconflow.cn
+      model: deepseek-ai/DeepSeek-V3
+      chat:
+        completion-path: /v1/chat/completions
+        options:
+          model: deepseek-ai/DeepSeek-V3
+    mcp:
+      client:
+        toolcallback:
+          enabled: true
+        request-timeout: 30s
+        stdio:
+          connections:
+            amap-maps:
+              command: npx.cmd
+              args:
+                - "-y"
+                - "@amap/amap-maps-mcp-server"
+              env:
+                "AMAP_MAPS_API_KEY": "855505cdf0e3e5820ec3d80167ffa791"
