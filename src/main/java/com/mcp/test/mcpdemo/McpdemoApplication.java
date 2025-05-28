@@ -25,23 +25,7 @@ public class McpdemoApplication {
         SpringApplication.run(McpdemoApplication.class, args);
     }
 
-    /**
-     * 创建并配置WebClientCustomizer bean
-     * 用于自定义WebClient实例，添加请求过滤器以日志记录请求详细信息
-     * @return WebClientCustomizer实例
-     */
-    @Bean
-    public WebClientCustomizer webClientCustomizer() {
-        return webClient -> webClient.filter((request, next) -> {
-            // 记录请求的方法和URL
-            log.info("Request: " + request.method() + " " + request.url());
-            // 遍历并记录请求的头部信息
-            request.headers().forEach((name, values) ->
-                    values.forEach(value -> System.out.printf("Header: %s=%s%n", name, value)));
-            // 继续处理请求
-            return next.exchange(request);
-        });
-    }
+
 
     /**
      * 创建并配置CommandLineRunner bean，用于在应用程序启动后执行一些预定义的操作
@@ -55,7 +39,7 @@ public class McpdemoApplication {
     public CommandLineRunner predefinedQuestions(ChatClient.Builder chatClientBuilder, ToolCallbackProvider tools,
                                                 ConfigurableApplicationContext context) {
         // 预定义的用户输入
-        String userInput="昆明今天天气如何";
+        String userInput="请问当前IP地址的物理位置周边有几个加油站?";
         return args -> {
             // 构建ChatClient实例
             var chatClient = chatClientBuilder
