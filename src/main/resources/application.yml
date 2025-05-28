@@ -5,7 +5,7 @@ spring:
   application:
     name: mcp
   main:
-    web-application-type: none
+    web-application-type: REACTIVE
   ai:
     openai:
       api-key: ${OPENAPI_KEY}

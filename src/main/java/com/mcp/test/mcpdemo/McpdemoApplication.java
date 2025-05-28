@@ -27,34 +27,7 @@ public class McpdemoApplication {
 
 
 
-    /**
-     * 创建并配置CommandLineRunner bean，用于在应用程序启动后执行一些预定义的操作
-     * 这里用于演示如何使用ChatClient发送预定义的问题，并打印结果
-     * @param chatClientBuilder ChatClient的构建器
-     * @param tools 工具回调提供者
-     * @param context 配置应用程序上下文，以便在操作完成后关闭
-     * @return CommandLineRunner实例
-     */
-    @Bean
-    public CommandLineRunner predefinedQuestions(ChatClient.Builder chatClientBuilder, ToolCallbackProvider tools,
-                                                ConfigurableApplicationContext context) {
-        // 预定义的用户输入
-        String userInput="请问当前IP地址的物理位置周边有几个加油站?";
-        return args -> {
-            // 构建ChatClient实例
-            var chatClient = chatClientBuilder
-                    .defaultToolCallbacks(tools)
-                    .build();
 
-            // 打印问题
-			log.info("\n>>> QUESTION: " + userInput);
-            // 使用ChatClient发送问题，并打印回答内容
-			log.info("\n>>> ASSISTANT: " + chatClient.prompt(userInput).call().content());
-
-            // 关闭应用程序上下文
-            context.close();
-        };
-    }
 
 }
 

@@ -1,8 +1,9 @@
 package com.mcp.test.mcpdemo.controller;
 
 import org.springframework.ai.chat.client.ChatClient;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
-
+import reactor.core.publisher.Flux;
 
 
 @RestController
@@ -14,15 +15,11 @@ public class LLMController {
         this.chatClient = builder.build();;
     }
 
-   // @GetMapping(path = "/stream", produces = MediaType.TEXT_HTML_VALUE)
-   // public Flux<String> helloStream(@RequestParam(name = "input", defaultValue = "AI编程趋势是什么") String input) {
-   //     return chatClient.prompt(input)
-   //             .stream()
-   //             .content();
-   // }
-
-    @GetMapping
-    public String hello(@RequestParam(name = "input", defaultValue = "AI编程趋势是什么") String input) {
-        return chatClient.prompt(input).call().content();
+    @GetMapping(path = "/stream", produces = MediaType.TEXT_HTML_VALUE)
+    public Flux<String> helloStream(@RequestParam(name = "input", defaultValue = "AI编程趋势是什么") String input) {
+        return chatClient.prompt(input)
+                .stream()
+                .content();
     }
+
 }
