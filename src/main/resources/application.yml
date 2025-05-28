@@ -8,7 +8,7 @@ spring:
     web-application-type: none
   ai:
     openai:
-      api-key: sk-xxxxxxxxx
+      api-key: ${OPENAPI_KEY}
       base-url: https://api.siliconflow.cn
       model: deepseek-ai/DeepSeek-V3
       chat:
@@ -30,10 +30,10 @@ spring:
                 - "-y"
                 - "@amap/amap-maps-mcp-server"
               env:
-                "AMAP_MAPS_API_KEY": "855505cdf0e3e5820ec3d80167ffa791"
+                "AMAP_MAPS_API_KEY": "${AMAP_MAPS_API_KEY}"
 
 management:
   endpoints:
     web:
       exposure:
-        include=health,metrics,prometheus
+        include: health,metrics,prometheus
